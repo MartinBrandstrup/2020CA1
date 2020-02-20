@@ -203,15 +203,19 @@ public class CarFacade
      * null if failed. WARNING: empties the database of any current entries!
      *
      * @param numberOfEntries The number of entries to populate with.
-     * @return a String reporting the result.
+     * @return a List<Car> containing the same objects that has just been 
+     * persisted to the database (except the objects' IDs).
      */
-    public String populateDatabaseWithCars(int numberOfEntries)
+    public List<Car> populateDatabaseWithCars(int numberOfEntries)
     {
         EntityManager em = emf.createEntityManager();
         try
         {
             em.getTransaction().begin();
             em.createNamedQuery("Car.deleteAllRows").executeUpdate();
+            
+            List<Car> carList = new ArrayList<>();
+            
             for (int i = 0; i < numberOfEntries; i++)
             {
                 String make = "make" + i;
@@ -220,11 +224,13 @@ public class CarFacade
 //                LocalDate localD = LocalDate.now();
                 double price = 1000 + i;
                 String owner = "owner" + i;
-                String color = "color" + 1;
-                em.persist(new Car(make, model, localD, price, owner, color, Car.FuelType.Diesel));
+                String color = "color" + i;
+                Car c = new Car(make, model, localD, price, owner, color, Car.FuelType.Diesel);
+                carList.add(c);
+                em.persist(c);
             }
             em.getTransaction().commit();
-            return numberOfEntries + " entries successfully added to database";
+            return carList;
         }
         catch (Exception ex)
         {

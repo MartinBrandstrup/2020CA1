@@ -1,12 +1,16 @@
 package facades;
 
+import dtos.CarDTO;
+import entities.Car;
+import java.util.ArrayList;
 import utils.EMF_Creator;
-import entities.Joke;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -77,6 +81,35 @@ public class CarFacadeTest
     public void carCountTest()
     {
         assertEquals(numberOfDummies, facade.getCarCount(), "Expects " + numberOfDummies + " rows in the database");
+    }
+    
+    @Test
+    public void getAllCarsTest()
+    {
+        //populating database twice in order to get access to the objects I populated the database with
+//        List<Car> carListToPersist = facade.populateDatabaseWithCars(numberOfDummies);
+//        List<CarDTO> persistedListToCompare = new ArrayList<>();
+        List<CarDTO> databaseContent = facade.getAllCars();
+        
+        assertFalse(databaseContent == null);
+        assertFalse(databaseContent.isEmpty());
+        assertEquals(numberOfDummies, databaseContent.size(), "Expects " + numberOfDummies + " rows in the database");
+        
+        //Getting the lowest ID of a Car object in the database from the newly
+        //persisted objects
+//        int currentDatabaseNodeID = databaseContent.get(0).getId();
+//        
+//        for (Car c : carListToPersist)
+//        {
+//            CarDTO cDTO = new CarDTO(c);
+//            cDTO.setId(currentDatabaseNodeID);
+//            currentDatabaseNodeID += 1;
+//            persistedListToCompare.add(cDTO);
+//        }
+//        assertEquals(databaseContent, persistedListToCompare);
+
+        //Turns out to be almost impossible to do, since the database does not
+        //persist objects in a proper order.
     }
 
 }
