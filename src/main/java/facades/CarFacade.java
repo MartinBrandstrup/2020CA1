@@ -1,5 +1,6 @@
 package facades;
 
+import dtos.CarDTO;
 import entities.Car;
 import entities.Joke;
 import java.text.ParseException;
@@ -8,12 +9,14 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -30,6 +33,17 @@ public class CarFacade
     {
     }
 
+    /*
+    This class contains the following methods in this order:
+    getCarFacade(EntityManagerFactory _emf)
+    getEntityManager()
+    getCarCount()
+    getAllCars()
+    getCarByID(int id)
+    getCarDTOByID(int id)
+    persistCar(Car c)
+    populateDatabaseWithCars(int numberOfEntries)
+     */
     /**
      *
      * @param _emf
@@ -66,8 +80,127 @@ public class CarFacade
     }
 
     /**
-     * Populates the database with a set of dummy entries for testing.WARNING:
-     * empties the database of any current entries!
+     * Retrieves all Cars from the database as CarDTO objects. Returns null if 
+     * failed.
+     *
+     * @return a List<CarDTO>
+     */
+    public List<CarDTO> getAllCars()
+    {
+        EntityManager em = getEntityManager();
+        try
+        {
+            List<CarDTO> carDTOList = new ArrayList<>();
+            TypedQuery<Car> query
+                    = em.createQuery("SELECT c FROM Car c", Car.class);
+
+            query.getResultList().forEach((c) ->
+            {
+                carDTOList.add(new CarDTO(c));
+            });
+
+            return carDTOList;
+        }
+        catch (Exception ex)
+        {
+            System.out.println("Operation getAllCars failed.");
+            return null;
+        }
+        finally
+        {
+            em.close();
+        }
+    }
+    
+    /**
+     * Attempts to retrieve a Car object from the database corresponding to
+     * the provided ID. Used mainly for back-end work, since not all information 
+     * of the Car object should be displayed on the front-end.
+     * Returns null if operation fails
+     * 
+     * @param id The provided ID to search the database for.
+     * @return a Car object containing all information.
+     */
+    public Car getCarByID(int id)
+    {
+        EntityManager em = getEntityManager();
+        try
+        {
+            Car c = em.find(Car.class, id);
+            return c;
+        }
+        catch (Exception ex)
+        {
+            System.out.println("Failed to find the specified Car object.");
+            return null;
+        }
+        finally
+        {
+            em.close();
+        }
+    }
+
+    /**
+     * Attempts to retrieve a CarDTO object from the database corresponding to 
+     * the provided ID. Used mainly for front-end since not all necessary info 
+     * is provided with a DTO object.
+     * Returns null if operation fails.
+     * 
+     * @param id The provided ID to search the database for.
+     * @return a CarDTO object containing necessary information to be displayed 
+     * on the front-end.
+     */
+    public CarDTO getCarDTOByID(int id)
+    {
+        EntityManager em = getEntityManager();
+        try
+        {
+            Car c = em.find(Car.class, id);
+            CarDTO cDTO = new CarDTO(c);
+            return cDTO;
+        }
+        catch (Exception ex)
+        {
+            System.out.println("Failed to find the specified Car object.");
+            return null;
+        }
+        finally
+        {
+            em.close();
+        }
+    }
+
+    /**
+     * Attempts to persist a Car object to the DB. Returns the persisted object
+     * if successful, null if the operation fails.
+     *
+     * @param c The Car object to persist.
+     * @return the same Car object that has been persisted.
+     */
+    public Car persistCar(Car c)
+    {
+        EntityManager em = getEntityManager();
+        try
+        {
+            em.getTransaction().begin();
+            em.persist(c);
+            em.getTransaction().commit();
+            return c;
+        }
+        catch (Exception ex)
+        {
+            System.out.println("Failed to persist provided Car object.");
+            return null;
+        }
+        finally
+        {
+            em.close();
+        }
+    }
+
+    /**
+     * Populates the database with a set of dummy entries for testing. Returns
+     * null if failed. WARNING: empties the database of any current entries!
      *
      * @param numberOfEntries The number of entries to populate with.
      * @return a String reporting the result.
@@ -92,6 +225,11 @@ public class CarFacade
             }
             em.getTransaction().commit();
             return numberOfEntries + " entries successfully added to database";
+        }
+        catch (Exception ex)
+        {
+            System.out.println("Operation populateDatabaseWithCars failed.");
+            return null;
         }
         finally
         {

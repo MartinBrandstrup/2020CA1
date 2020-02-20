@@ -22,15 +22,15 @@ public class CarDTO
     private String color;
     private String fuel;
 
-    public CarDTO(Car car)
+    public CarDTO(Car c)
     {
-        this.id = car.getId();
-        this.make = car.getMake();
-        this.model = car.getModel();
-        this.year = String.valueOf(car.getLocalDate().getYear());
-        this.price = car.getPrice();
-        this.color = car.getColor();
-        this.fuel = car.getFuel().toString();
+        this.id = c.getId();
+        this.make = c.getMake();
+        this.model = c.getModel();
+        this.year = String.valueOf(c.getLocalDate().getYear());
+        this.price = c.getPrice();
+        this.color = c.getColor();
+        this.fuel = c.getFuel().toString();
     }
 
     @Override
