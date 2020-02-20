@@ -10,12 +10,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 
 /**
  *
  * @author Christian
  */
 @Entity
+@NamedQuery(name = "GroupMember.deleteAllRows", query = "DELETE from GroupMember")
 public class GroupMember implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -24,17 +26,26 @@ public class GroupMember implements Serializable {
     private Long id;
     private String name;
     private String StudentId;
-    private String Color;
+    private ColorType Color;
+    private String email;
+    
+    public enum ColorType
+            {
+            Green,
+            Yellow,
+            Red
+            }
 
     public GroupMember() {
     }
 
-    public GroupMember(String name, String StudentId, String Color) {
+    public GroupMember(String name, String StudentId, ColorType Color, String email) {
         this.name = name;
         this.StudentId = StudentId;
         this.Color = Color;
+        this.email = email;
     }
- 
+    
     public Long getId() {
         return id;
     }
@@ -47,11 +58,14 @@ public class GroupMember implements Serializable {
         return StudentId;
     }
 
-    public String getColor() {
+    public ColorType getColor() {
         return Color;
     }
 
-    
+    public String getEmail() {
+        return email;
+    }
+
     
     @Override
     public boolean equals(Object object) {

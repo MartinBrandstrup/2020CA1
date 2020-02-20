@@ -41,9 +41,44 @@ public class GroupMemberFacade {
         return emf.createEntityManager();
     }
 
-
+///////////////////////////methods////////////////////////////////
     
-    public List<GroupMember> getAllGroupMembers() {
+    
+    /**
+     * Used for DB test
+     * @return number of GroupMembers
+     */
+    public long getGroupMemberCount()
+    {
+        EntityManager em = emf.createEntityManager();
+        try
+        {
+            long MembersCount = (long) em.createQuery("SELECT COUNT(c) FROM GroupMember c").getSingleResult();
+            return MembersCount;
+        }
+        finally
+        {
+            em.close();
+        }
+    }
+    
+     public GroupMember findGroupMemberById(long id) {
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            GroupMember grpMeb = em.find(GroupMember.class, id);
+            return grpMeb;
+        } finally {
+            em.close();
+        }
+    }
+    
+    /**
+     * Retrives all members of the group, used for index page 
+     * @return a list of GroupMembers
+     */
+    public List<GroupMember> getAllGroupMembers() 
+    {
         EntityManager em = getEntityManager();
         try {
             TypedQuery<GroupMember> query = em.createQuery("SELECT e From GroupMember e", GroupMember.class);
@@ -53,3 +88,4 @@ public class GroupMemberFacade {
         }
     }
 }
+
