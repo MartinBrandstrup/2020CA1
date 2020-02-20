@@ -65,8 +65,6 @@ public class CarFacade
 
     }
 
-    
-
     /**
      * Populates the database with a set of dummy entries for testing.WARNING:
      * empties the database of any current entries!
