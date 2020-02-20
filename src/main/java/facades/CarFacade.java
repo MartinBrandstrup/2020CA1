@@ -94,10 +94,11 @@ public class CarFacade
             TypedQuery<Car> query
                     = em.createQuery("SELECT c FROM Car c", Car.class);
 
-            query.getResultList().forEach((c) ->
+            
+            for (Car c : query.getResultList())
             {
                 carDTOList.add(new CarDTO(c));
-            });
+            }
 
             return carDTOList;
         }
