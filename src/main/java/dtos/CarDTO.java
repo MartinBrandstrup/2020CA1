@@ -32,6 +32,15 @@ public class CarDTO
         this.color = car.getColor();
         this.fuel = car.getFuel().toString();
     }
+
+    @Override
+    public String toString()
+    {
+        return "CarDTO{" + "id=" + id + ", make=" + make + ", model=" + model
+                + ", year=" + year + ", price=" + price + ", color=" + color
+                + ", fuel=" + fuel + '}';
+    }
+    
     
     
 }
