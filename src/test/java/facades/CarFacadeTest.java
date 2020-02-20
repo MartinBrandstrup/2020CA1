@@ -73,10 +73,10 @@ public class CarFacadeTest
 //        Remove any data after each test was run
     }
 
-//    @Test
-//    public void carCountTest()
-//    {
-//        assertEquals(numberOfDummies, facade.getCarCount(), "Expects " + numberOfDummies + " rows in the database");
-//    }
+    @Test
+    public void carCountTest()
+    {
+        assertEquals(numberOfDummies, facade.getCarCount(), "Expects " + numberOfDummies + " rows in the database");
+    }
 
 }

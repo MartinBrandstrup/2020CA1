@@ -5,6 +5,9 @@ import entities.Joke;
 import java.text.ParseException;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,7 +16,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 /**
- * 
+ *
  * @author Brandstrup
  */
 public class CarFacade
@@ -61,10 +64,13 @@ public class CarFacade
         }
 
     }
+
     
+
     /**
-     * Populates the database with a set of dummy entries for testing.WARNING: empties the database of any current entries!
-     * 
+     * Populates the database with a set of dummy entries for testing.WARNING:
+     * empties the database of any current entries!
+     *
      * @param numberOfEntries The number of entries to populate with.
      * @return a String reporting the result.
      */
@@ -79,11 +85,12 @@ public class CarFacade
             {
                 String make = "make" + i;
                 String model = "model" + i;
-//                Date year = new SimpleDateFormat("yyyy").parse("2000");
+                LocalDate localD = LocalDate.of(2001, Month.MARCH, 13);
+//                LocalDate localD = LocalDate.now();
                 double price = 1000 + i;
                 String owner = "owner" + i;
                 String color = "color" + 1;
-                em.persist(new Car(make, model, price, owner, color, Car.FuelType.Diesel));
+                em.persist(new Car(make, model, localD, price, owner, color, Car.FuelType.Diesel));
             }
             em.getTransaction().commit();
             return numberOfEntries + " entries successfully added to database";
