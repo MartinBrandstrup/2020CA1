@@ -91,5 +91,14 @@ public class CarResource
             return "{\"msg\":\"Operation getCarById " + id + " failed\"}";
         }
     }
+    
+    @GET
+    @Path("/populate/{numberOfEntries}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String populate(@PathParam("numberOfEntries") int numberOfEntries)
+    {
+        FACADE.populateDatabaseWithCars(numberOfEntries);
+        return "{\"msg\":\"Database has been populated with " + numberOfEntries + " Cars!\"}";
+    }
 
 }
