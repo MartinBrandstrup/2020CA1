@@ -25,14 +25,13 @@ public class Joke implements Serializable
         
     }
 
-    public Joke(Long id, String type, String joke, int funnyness, String description) {
-        this.id = id;
+    public Joke(String type, String joke, int funnyness, String description) {
+        
         this.type = type;
         this.joke = joke;
         this.funnyness = funnyness;
         this.description = description;
     }
- 
 
     public Long getId() {
         return id;
@@ -41,6 +40,8 @@ public class Joke implements Serializable
     public void setId(Long id) {
         this.id = id;
     }
+    
+    
 
     public String getType() {
         return type;
