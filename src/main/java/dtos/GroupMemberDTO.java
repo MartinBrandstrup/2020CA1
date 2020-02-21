@@ -17,13 +17,13 @@ public class GroupMemberDTO {
     private String StudentId;
     private GroupMember.ColorType Color;
 
-    public GroupMemberDTO(Long id, String name, String StudentId, GroupMember.ColorType Color) {
-        this.id = id;
-        this.name = name;
-        this.StudentId = StudentId;
-        this.Color = Color;
+    public GroupMemberDTO(GroupMember groupMember) {
+        this.id = groupMember.getId();
+        this.name = groupMember.getName();
+        this.StudentId = groupMember.getStudentId();
+        this.Color = groupMember.getColor();
     }
-
+// getters to fill table. 
     public Long getId() {
         return id;
     }

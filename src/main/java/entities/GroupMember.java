@@ -27,7 +27,7 @@ public class GroupMember implements Serializable {
     private String name;
     private String StudentId;
     private ColorType Color;
-    private String email;
+   // private String email;
     
     public enum ColorType
             {
@@ -39,12 +39,24 @@ public class GroupMember implements Serializable {
     public GroupMember() {
     }
 
-    public GroupMember(String name, String StudentId, ColorType Color, String email) {
+    public GroupMember(String name, String StudentId, ColorType Color/*, String email*/) {
         this.name = name;
         this.StudentId = StudentId;
         this.Color = Color;
-        this.email = email;
+       // this.email = email;
     }
+    /**
+     * add withuot id and email (email is secret and given by backend)
+     * @param name
+     * @param StudentId
+     * @param Color 
+     */
+//    public GroupMember(String name, String StudentId, ColorType Color) {
+//        this.name = name;
+//        this.StudentId = StudentId;
+//        this.Color = Color;
+//    }
+    
     
     public Long getId() {
         return id;
@@ -62,9 +74,9 @@ public class GroupMember implements Serializable {
         return Color;
     }
 
-    public String getEmail() {
-        return email;
-    }
+//    public String getEmail() {
+//        return email;
+//    }
 
     
     @Override
