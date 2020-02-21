@@ -214,7 +214,6 @@ public class CarFacade
         {
             em.getTransaction().begin();
             em.createNamedQuery("Car.deleteAllRows").executeUpdate();
-            
             List<Car> carList = new ArrayList<>();
             
             for (int i = 0; i < numberOfEntries; i++)

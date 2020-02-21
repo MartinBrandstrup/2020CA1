@@ -37,7 +37,7 @@ public class CarResourceTest
     private static final int SERVER_PORT = 7777;
     private static final String SERVER_URL = "http://localhost/api";
 
-    static private int numberOfEntries = 5;
+    static private int numberOfDummies = 5;
 
     static final URI BASE_URI = UriBuilder.fromUri(SERVER_URL).port(SERVER_PORT).build();
     private static HttpServer httpServer;
@@ -79,7 +79,18 @@ public class CarResourceTest
     @BeforeEach
     public void setUp()
     {
-        facade.populateDatabaseWithCars(numberOfEntries);
+//        EntityManager em = emf.createEntityManager();
+//        try
+//        {
+//            em.getTransaction().begin();
+//            em.createNamedQuery("Car.deleteAllRows").executeUpdate();
+            facade.populateDatabaseWithCars(numberOfDummies);
+//            em.getTransaction().commit();
+//        }
+//        finally
+//        {
+//            em.close();
+//        }
     }
 
     @Test
@@ -109,24 +120,24 @@ public class CarResourceTest
                 .get("/car/count").then()
                 .assertThat()
                 .statusCode(HttpStatus.OK_200.getStatusCode())
-                .body("count", equalTo(numberOfEntries));
+                .body("count", equalTo(numberOfDummies));
     }
 
     @Test
     public void allCarsTest() throws Exception
     {
-        int nmbrTest1 = numberOfEntries - 1;
-        int nmbrTest2 = numberOfEntries - 2;
+        int nmbrTest1 = numberOfDummies - 1;
+        int nmbrTest2 = numberOfDummies - 2;
 
         given()
                 .contentType("application/json")
                 .get("/car/all").then()
                 .assertThat()
                 .statusCode(HttpStatus.OK_200.getStatusCode())
-                .body(CoreMatchers.containsString("title" + nmbrTest1))
+                .body(CoreMatchers.containsString("make" + nmbrTest1))
                 .and().assertThat()
                 .statusCode(HttpStatus.OK_200.getStatusCode())
-                .body(CoreMatchers.containsString("title" + nmbrTest2));
+                .body(CoreMatchers.containsString("make" + nmbrTest2));
     }
 
     @Test
@@ -134,7 +145,7 @@ public class CarResourceTest
     {
         Car testCar = facade.persistCar(new Car("make", "model", LocalDate.now(), 100, "owner", "color", Car.FuelType.Diesel));
         
-        int newestAdditionID = facade.getAllCars().get(numberOfEntries).getId();
+        int newestAdditionID = facade.getAllCars().get(numberOfDummies).getId();
         testCar.setId(newestAdditionID);
         
         given()
@@ -142,6 +153,6 @@ public class CarResourceTest
                 .get("/car/" + newestAdditionID).then()
                 .assertThat()
                 .statusCode(HttpStatus.OK_200.getStatusCode())
-                .body("title", equalTo(testCar.getModel()));
+                .body("model", equalTo(testCar.getModel()));
     }
 }
