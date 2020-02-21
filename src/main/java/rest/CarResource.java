@@ -22,7 +22,7 @@ import javax.ws.rs.core.MediaType;
  *
  * @author Brandstrup
  */
-@Path("api")
+@Path("car")
 public class CarResource
 {
 
@@ -40,20 +40,20 @@ public class CarResource
 
     @GET
     @Produces(
-    {
-        MediaType.APPLICATION_JSON
-    })
+            {
+                MediaType.APPLICATION_JSON
+            })
     public String demo()
     {
         return "{\"msg\":\"Hello World\"}";
     }
 
-    @Path("count")
+    @Path("/count")
     @GET
     @Produces(
-    {
-        MediaType.APPLICATION_JSON
-    })
+            {
+                MediaType.APPLICATION_JSON
+            })
     public String carCount()
     {
         long count = FACADE.getCarCount();
