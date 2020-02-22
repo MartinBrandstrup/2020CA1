@@ -1,19 +1,69 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <style>
+            .center {
+                margin: auto;
+                width: 25%;
+                padding: 10px;
+            }
+            .centerTable {
+                margin: auto;
+                width: 40%;
+                padding: 10px;
+            }
+
+            #GroupTabel {
+                font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+
+            }
+
+            #GroupTabel td, #workflow th {
+                border: 1px solid black;
+                padding: 8px;
+                front-size: 10px;
+
+
+            }
+            #GroupTabel tr:nth-child(even){background-color: #f2f2f2;}
+
+            #GroupTabel tr:hover {background-color: #ddd;}
+
+
+            #GroupTabel th {
+                background-color: #4CAF50;
+                border: 1px solid black;
+                color: white;
+                text-align: center;
+                font-size: 15px;}   
+
+            .button{
+                margin: auto;
+                text-align: center;
+                width: 15%;
+                padding: 10px;
+            }
+        </style>
+        <script>
+            document.getElementById("reloadMembers").onclick = reloadNewMembers;
+
+        </script>
+
         <title>Start Page</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-        <h1>Group 4</h1>
+        <h1 class="center">Group 4</h1>
 
 
         <!--Group information-->
-        <h2>Group information</h2>
+        <h2 class="center">Group information</h2>
         <!--Table => use /fill and use /all to --> 
-        
-        <div id="GroupTabel"> 
-            <table>
+
+        <div  id="GroupTabel"> 
+            <table class="centerTable">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -23,12 +73,13 @@
                 </thead>
                 <tbody id="GroupMemberTabel"></tbody>
             </table>
-        
+
         </div>
-        
+        <div><button  id="reloadMembers" type="button" class="button">Reload Members</button></div>
+        <<button  id="reloadMembers" class="button">Reload Members</button>
         <!--Link section-->
-        <h2>Links</h2>
-        <div id="linksDiv"> 
+        <h2 class="center">Links</h2>
+        <div class="center" id="linksDiv"> 
             <a href="groupContract.html">Link to group contract</a><br>
             <a href="Feedback.html">Feedback</a><br>
             <a href="https://github.com/MartinBrandstrup/2020CA1/">Link to GitHub Repository</a> <br>
