@@ -2,9 +2,11 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import dtos.JokeDTO;
 import entities.Joke;
 import utils.EMF_Creator;
 import facades.JokeFacade;
+import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -15,7 +17,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-@Path("api")
+@Path("joke")
 public class JokeResource {
 
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory(
@@ -46,5 +48,35 @@ public class JokeResource {
         return "{\"count\":"+count+"}";  //Done manually so no need for a DTO
     }
 
+    @Path("fill")
+    @GET
+     @Produces({MediaType.APPLICATION_JSON})
+    public String fillDatabaseWithJokes() {
+    
+        FACADE.addJoke("plat", "Hvad er det værste ved at blive fyret fra et jobcenter? Man skal også møde op dagen efter.", 4, "børnevenlig");
+        FACADE.addJoke("god", "Hvad er det værste ved at blive fyret fra et jobcenter? Man skal også møde op dagen efter.", 4, "børnevenlig");
+     
+        return GSON.toJson("Database filled");
+        
+    }
+    
+    @Path("{id}")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getJokeById(@PathParam("id")Long id) {
+        
+        Joke joke = FACADE.getJokeByID(id);
+         return GSON.toJson(joke);
+        
+    }
+    
+    @Path("all")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getAllJokes(){
+        
+        List<JokeDTO> all = FACADE.getAllJokes();
+        return GSON.toJson(all);
+    }
  
 }
