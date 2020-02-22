@@ -20,10 +20,7 @@ public class JokeFacade
     {
     }
 
-    public static void main(String[] args) {
-        JokeFacade jf = new JokeFacade();
-        jf.addJoke("plat", "Hvad er det værste ved at blive fyret fra et jobcenter? Man skal også møde op dagen efter.", 4, "børnevenlig");
-    }
+    
     
     /**
      *
@@ -50,10 +47,12 @@ public class JokeFacade
            EntityManager em = emf.createEntityManager();
            
            Joke joke1 = new Joke(type, j, funnyness, description);
+           Joke joke2 = new Joke(type, j, funnyness, description);
         try {
             
             em.getTransaction().begin();
             em.persist(joke1);
+           
             em.getTransaction().commit();
             
         } finally{
@@ -62,6 +61,26 @@ public class JokeFacade
         
         return joke1;   
     }
+    
+     public Joke getJokeByID(Long id)
+    {
+        EntityManager em = getEntityManager();
+        try
+        {
+            Joke j = em.find(Joke.class, id);
+            return j;
+        }
+        catch (Exception ex)
+        {
+            System.out.println("Failed to find the specified joke object.");
+            return null;
+        }
+        finally
+        {
+            em.close();
+        }
+    }
+
 
     public long getJokeCount()
     {
@@ -80,26 +99,26 @@ public class JokeFacade
  * @author codemiles.
  */
  
-// public List<JokeDTO> getAllJokes()
-//    {
-//        EntityManager em = getEntityManager();
-//        try
-//        {
-//            List<JokeDTO> carDTOList = new ArrayList<>();
-//            TypedQuery<Joke> query
-//                    = em.createQuery("SELECT j FROM Joke j", Joke.class);
-//            query.getResultList().forEach((j) ->
-//            {
-//                carDTOList.add(new JokeDTO());
-//            });
-//            return carDTOList;}
-//        catch (Exception ex){
-//            System.out.println("Operation failed. Be your own laugh!!");
-//            return null;}
-//        finally
-//        {
-//          em.close();
-//        }}
+ public List<JokeDTO> getAllJokes()
+    {
+        EntityManager em = getEntityManager();
+        try
+        {
+            List<JokeDTO> carDTOList = new ArrayList<>();
+            TypedQuery<Joke> query
+                    = em.createQuery("SELECT j FROM Joke j", Joke.class);
+            query.getResultList().forEach((j) ->
+            {
+                carDTOList.add(new JokeDTO(j));
+            });
+            return carDTOList;}
+        catch (Exception ex){
+            System.out.println("Operation failed. Be your own laugh!!");
+            return null;}
+        finally
+        {
+          em.close();
+        }}
 
    public Joke getByID(int id)
     {
