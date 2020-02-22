@@ -112,14 +112,14 @@ public class JokeResourceTest
                 .body("msg", equalTo("Hello World"));
     }
 
-//    @Test
-//    public void testCount() throws Exception
-//    {
-//        given()
-//                .contentType("application/json")
-//                .get("/api/count").then()
-//                .assertThat()
-//                .statusCode(HttpStatus.OK_200.getStatusCode())
-//                .body("count", equalTo(numberOfDummies));
-//    }
+    @Test
+    public void testCount() throws Exception
+    {
+        given()
+                .contentType("application/json")
+                .get("/api/count").then()
+                .assertThat()
+                .statusCode(HttpStatus.OK_200.getStatusCode())
+                .body("count", equalTo(numberOfDummies));
+    }
 }
