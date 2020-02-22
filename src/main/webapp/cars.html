@@ -2,34 +2,30 @@
 <html>
     <head>
         <title>Cars</title>
-        <!--        <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="css/jokecss.css" rel="stylesheet">
+        <link href="CSS/CarCSS.css" rel="stylesheet">
 
-        <!-- BootStrap -->
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     </head>
     <body>
 
         <!-- Page Content -->
         <section class="py-5">
             <div class="container">
-                <form>
-                    Joke id#: <input type="text" id="carInput">
+<!--                <form>
+                    Car id#: <input type="text" id="carInput">
                     <input type="submit" id="showSingleButton" value="Pick a car by id#">
-                </form>
-                <input type="submit" id="showAllButton" value="Show a table with all cars">
+                </form>-->
+                <input type="submit" id="buttonAll" value="Show a table with all cars">
+                <input type="submit" id="buttonSortPrice" value="Sort the table by price">
+                <input type="submit" id="buttonSortYear" value="Sort the table by year">
+                <input type="submit" id="buttonSortMake" value="Sort the table by make">
 
                 <div id="carTable"></div>
-                <p id="paragraph">
             </div>
         </section>
-
-<!--         JQUERY JS 
-        <script src="https://code.jquery.com/jquery-3.4.0.min.js" crossorigin="anonymous"></script>
-         BOOTSTRAP JS 
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>-->
+        
+        <p><b><a href="index.html" 
+                 target="/2020CA1/">Return to index</a></b></p>
 
         <script src="JavaScript/CarJS.js"></script>
     </body>
