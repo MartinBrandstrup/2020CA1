@@ -6,7 +6,6 @@
 package dtos;
 
 import entities.Car;
-import java.util.Date;
 
 /**
  *
