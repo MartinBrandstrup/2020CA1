@@ -104,14 +104,14 @@ public class JokeFacade
         EntityManager em = getEntityManager();
         try
         {
-            List<JokeDTO> carDTOList = new ArrayList<>();
+            List<JokeDTO> jokeDTOList = new ArrayList<>();
             TypedQuery<Joke> query
                     = em.createQuery("SELECT j FROM Joke j", Joke.class);
             query.getResultList().forEach((j) ->
             {
-                carDTOList.add(new JokeDTO(j));
+                jokeDTOList.add(new JokeDTO(j));
             });
-            return carDTOList;}
+            return jokeDTOList;}
         catch (Exception ex){
             System.out.println("Operation failed. Be your own laugh!!");
             return null;}
@@ -119,6 +119,7 @@ public class JokeFacade
         {
           em.close();
         }}
+ 
 
    public Joke getByID(int id)
     {
@@ -136,19 +137,19 @@ public class JokeFacade
             em.close();}}
    
    
-       public long getRandomJoke()
-    {
-        EntityManager em = getEntityManager();
-        try
-        {
-            long jokeCount = (long) em.createQuery("SELECT COUNT(r) FROM Joke r").getSingleResult();
-            return jokeCount;
-        }
-        finally
-        {
-            em.close();
-        }
-    }
+//       public long getRandomJoke()
+//    {
+//        EntityManager em = getEntityManager();
+//        try
+//        {
+//            long jokeCount = (long) em.createQuery("SELECT COUNT(r) FROM Joke r").getSingleResult();
+//            return jokeCount;
+//        }
+//        finally
+//        {
+//            em.close();
+//        }
+//    }
    
 //  EntityManager em = emf.
 // 
