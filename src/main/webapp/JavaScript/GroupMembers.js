@@ -5,16 +5,16 @@
  */
 
 // use URL with /localhost for testing local
-//var URL = "http://cakehr.dk/2020CA1/api/groupmembers/all"
-var URL = "http://localhost:8080/2020CA1/api/groupmembers/all"
+var URL = "/2020CA1/api/groupmembers/all"
 const table = document.getElementById("MemberTable");
+const Reload = document.getElementById("reloadNewMembers");
 
 fetch(URL)
         .then(res => res.json())
         .then(data =>{
         let list = data.map(function(member){
                 // table with values
-                return"<tr><td>" + member.name + "</td>" +
+                return "<tr><td>" + member.name + "</td>" +
                  "<td>" + member.StudentId + "</td>" +
                  "<td>" + member.Color + "</td>" +
                 "</tr>";
@@ -28,13 +28,19 @@ function reloadNewMembers() {
         .then(data =>{
         let list = data.map(function(member){
                 // table with values
-                return "<tr><td>" + member.name + "</td>" +
+                "<tr><td>" + member.name + "</td>" +
                  "<td>" + member.StudentId + "</td>" +
                  "<td>" + member.Color + "</td>" +
                 "</tr>";
             }).join("");
             document.getElementById("GroupMemberTabel").innerHTML = list;
 })
+
+Reload.onclick = function (e)
+{
+    e.preventDefault();
+        reloadNewMembers()();
+};
 // alternativ 
 //fetch(URL)
 //            .then(res => res.json())
