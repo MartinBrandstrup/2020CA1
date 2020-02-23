@@ -72,12 +72,11 @@ public class JokeFacadeTest
         {
             em.getTransaction().begin();
             em.createNamedQuery("Joke.deleteAllRows").executeUpdate();
-            
+
             for (int i = 0; i < numberOfDummies; i++)
             {
                 String title = "title" + i;
                 String body = "body" + i;
-                
 //                em.persist(new Joke(title, body));
             }
 //            jokeForIdTest = new Joke("titleId", "bodyId");
