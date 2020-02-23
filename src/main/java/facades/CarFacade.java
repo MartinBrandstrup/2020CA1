@@ -94,10 +94,11 @@ public class CarFacade
             TypedQuery<Car> query
                     = em.createQuery("SELECT c FROM Car c", Car.class);
 
-            query.getResultList().forEach((c) ->
+            
+            for (Car c : query.getResultList())
             {
                 carDTOList.add(new CarDTO(c));
-            });
+            }
 
             return carDTOList;
         }
@@ -213,7 +214,6 @@ public class CarFacade
         {
             em.getTransaction().begin();
             em.createNamedQuery("Car.deleteAllRows").executeUpdate();
-            
             List<Car> carList = new ArrayList<>();
             
             for (int i = 0; i < numberOfEntries; i++)
