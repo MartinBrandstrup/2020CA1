@@ -29,8 +29,13 @@ function populateTable()
             });
 }
 
-populateTable();
+//populateTable();
 
+buttonAll.onclick = function (e)
+{
+    e.preventDefault();
+    populateTable();
+};
 
 buttonSortPrice.addEventListener("click", function ()
 {

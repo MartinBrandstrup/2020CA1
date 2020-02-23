@@ -1,62 +1,13 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <style>
-            .center {
-                margin: auto;
-                width: 25%;
-                padding: 10px;
-            }
-            .centerTable {
-                margin: auto;
-                width: 40%;
-                padding: 10px;
-            }
-
-            #GroupTabel {
-                font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-                border-collapse: collapse;
-                width: 100%;
-
-            }
-
-            #GroupTabel td, #workflow th {
-                border: 1px solid black;
-                padding: 8px;
-                front-size: 10px;
-
-
-            }
-            #GroupTabel tr:nth-child(even){background-color: #f2f2f2;}
-
-            #GroupTabel tr:hover {background-color: #ddd;}
-
-
-            #GroupTabel th {
-                background-color: #4CAF50;
-                border: 1px solid black;
-                color: white;
-                text-align: center;
-                font-size: 15px;}   
-
-            .button{
-                margin: auto;
-                text-align: center;
-                width: 15%;
-                padding: 10px;
-            }
-        </style>
-        <script>
-            document.getElementById("reloadMembers").onclick = reloadNewMembers;
-
-        </script>
-
+        <link rel="stylesheet" href="CSS/indexCSS.css">
         <title>Start Page</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
         <h1 class="center">Group 4</h1>
-
+        <div id="MemberTable"></div>
 
         <!--Group information-->
         <h2 class="center">Group information</h2>
@@ -75,8 +26,8 @@
             </table>
 
         </div>
-        <div><button  id="reloadMembers" type="button" class="button">Reload Members</button></div>
         <<button  id="reloadMembers" class="button">Reload Members</button>
+        <!--<input type="submit" id="reloadMembers" value="Reload Members">-->
         <!--Link section-->
         <h2 class="center">Links</h2>
         <div class="center" id="linksDiv"> 
@@ -86,6 +37,6 @@
             <a href="/2020CA1/cars.html">Cars</a> <br>
             <a href="/2020CA1/joke.html">Jokes</a> <br>
         </div>
-        <script src="GroupMembers.js"type="text/javascript"></script>
+        <script src="JavaScript/GroupMembers.js"></script>
     </body>
 </html>
