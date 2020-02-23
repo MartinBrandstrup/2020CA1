@@ -54,7 +54,7 @@ public class JokeResource {
     public String fillDatabaseWithJokes() {
     
         FACADE.addJoke("plat", "Hvad er det værste ved at blive fyret fra et jobcenter? Man skal også møde op dagen efter.", 4, "børnevenlig");
-        FACADE.addJoke("god", "Hvad er det værste ved at blive fyret fra et jobcenter? Man skal også møde op dagen efter.", 4, "børnevenlig");
+        FACADE.addJoke("god", "Hvem ville være Bamses bedste ven, hvis Kylling brændte?? Aske", 4, "børnevenlig");
      
         return GSON.toJson("Database filled");
         
